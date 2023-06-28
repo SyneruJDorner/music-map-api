@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  musicmap_api:
+    image: musicmap_api
+    container_name: musicmap_api
+    environment:
+      - WITHIN_DOCKER_CONTAINER=True
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONUNBUFFERED=1
+      - DEBIAN_FRONTEND=noninteractive
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 7000:7000
