@@ -31,9 +31,8 @@ async def musicmap_connection(request: Request):
 @api_router.get('/api/v1/find-similar-music')
 @api_router.get('/api/v1/find-similar-music/', include_in_schema=False)
 @limiter.limit("2/second")
-async def find_similar_music_v1(request: Request, band: str = Query(..., description="Band you want to find similar music for")):
+async def find_similar_music_v1(request: Request, band: str = Query(None, description="Band you want to find similar music for")):
     content = await find_similar_music_helper(band)
-    print(type(content))
     if not content or type(content) != list:
         raise content
     return JSONResponse(content=content, status_code=200)
@@ -42,9 +41,8 @@ async def find_similar_music_v1(request: Request, band: str = Query(..., descrip
 @api_router.post('/api/v2/find-similar-music')
 @api_router.post('/api/v2/find-similar-music/', include_in_schema=False)
 @limiter.limit("2/second")
-async def find_similar_music_v2(request: Request, band: str = Form(..., description="Band you want to find similar music for")):
+async def find_similar_music_v2(request: Request, band: str = Form(None, description="Band you want to find similar music for")):
     content = await find_similar_music_helper(band)
-    print(type(content))
     if not content or type(content) != list:
         raise content
     
